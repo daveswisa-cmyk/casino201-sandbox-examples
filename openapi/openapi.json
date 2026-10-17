@@ -1,0 +1,32 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "casino201 sandbox API",
+    "description": "casino201 is the developer hub for a casino game aggregation API with a free sandbox. Developers learn the API and test it for free; accounts, sandbox keys, top-ups and production keys are created on casino-games-aggregation.com, which offers 4,000+ games from 129 studios behind one API and one prepaid balance.",
+    "version": "1.0.0"
+  },
+  "servers": [{ "url": "{endpoint}", "variables": { "endpoint": { "default": "https://your-sandbox-endpoint", "description": "Sent with your sandbox key" } } }],
+  "externalDocs": { "url": "https://casino201.com/docs" },
+  "security": [{ "bearerAuth": [] }],
+  "components": { "securitySchemes": { "bearerAuth": { "type": "http", "scheme": "bearer" } } },
+  "paths": {
+    "/api/v1/game-sessions/start": {
+      "post": {
+        "operationId": "startGameSession",
+        "summary": "Start a game session",
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "type": "object", "properties": {
+            "game_id": { "type": "integer" }, "player_id": { "type": "string" }, "currency": { "type": "string" },
+            "country_code": { "type": "string" }, "ip_address": { "type": "string" }, "locale": { "type": "string" },
+            "device": { "type": "string" }, "return_url": { "type": "string", "format": "uri" } } } } }
+        },
+        "responses": { "201": { "description": "Game session created", "content": { "application/json": { "schema": { "type": "object", "properties": {
+          "success": { "type": "boolean" },
+          "data": { "type": "object", "properties": {
+            "session_id": { "type": "integer" }, "session_token": { "type": "string" },
+            "expires_at": { "type": "string", "format": "date-time" }, "iframe_url": { "type": "string", "format": "uri" } } } } } } } } }
+      }
+    }
+  }
+}

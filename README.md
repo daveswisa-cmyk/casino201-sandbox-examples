@@ -77,6 +77,14 @@ Keep the raw body bytes (don't re-serialize parsed JSON), compare in constant ti
 - Keep your API key and webhook secret server-side. Never ship them to a browser.
 - Lock your key to your servers with an IP/CIDR allowlist.
 
+## OpenAPI
+
+OpenAPI 3.1 spec: [`openapi/openapi.json`](openapi/openapi.json) (also served at https://casino201.com/openapi.json).
+
+## Guide
+
+Step-by-step walkthrough: [How to test a casino game API for free](https://casino201.com/guides/test-casino-game-api-free)
+
 ## Postman
 
 Import [`postman/casino201-sandbox.postman_collection.json`](postman/casino201-sandbox.postman_collection.json) and set the `endpoint` and `api_key` collection variables.
