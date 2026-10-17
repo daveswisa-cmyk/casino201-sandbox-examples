@@ -1,0 +1,42 @@
+{
+  "info": {
+    "name": "casino201 sandbox API",
+    "description": "Free casino game API sandbox. Get a free sandbox key at https://casino-games-aggregation.com/register. Docs: https://casino201.com/docs. Set the `endpoint` and `api_key` collection variables to the values sent with your sandbox key. B2B only; not a gambling site.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "endpoint", "value": "", "description": "Sandbox endpoint sent with your sandbox key" },
+    { "key": "api_key", "value": "", "description": "Your sandbox API key (keep it server-side in production)" }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [{ "key": "token", "value": "{{api_key}}", "type": "string" }]
+  },
+  "item": [
+    {
+      "name": "Start game session",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{endpoint}}/api/v1/game-sessions/start",
+        "description": "Create a game session and get an iframe_url to load the demo game. Docs: https://casino201.com/docs/game-sessions",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"game_id\": 123,\n  \"player_id\": \"player_456\",\n  \"currency\": \"EUR\",\n  \"country_code\": \"US\",\n  \"ip_address\": \"203.0.113.24\",\n  \"locale\": \"en\",\n  \"device\": \"mobile\",\n  \"return_url\": \"https://yourcasino.com/lobby\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('success is true', () => pm.expect(pm.response.json().success).to.eql(true));",
+              "pm.test('iframe_url returned', () => pm.expect(pm.response.json().data.iframe_url).to.be.a('string'));"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
